@@ -1,0 +1,116 @@
+{%extends 'index.html'%}
+
+{%load static%}
+{%block content%}
+<div class="container"></div>
+        <!-- Filter Icon (for small screens) -->
+        <div class="filter-icon" onclick="toggleFilters()">
+            <i class="fas fa-filter"></i> <!-- Font Awesome filter icon -->
+        </div>
+
+        <!-- Filters section -->
+         <form name="filter" action="{%url 'core:home'%}">
+        <div class="filters hidden" id="filters-section">
+            <h2>Filters</h2>
+            <!-- Filter by price -->
+            <div class="filter-section">
+                <h3>Filter by price</h3>
+                <div class="filter-item">
+                    <input type="radio" id="low-price" name="price" value="low">
+                    <label for="low-price">Low Price</label>
+                </div>
+                <div class="filter-item">
+                    <input type="radio" id="mid-price" name="price" value="mid">
+                    <label for="mid-price">Medium Price</label>
+                </div>
+                <div class="filter-item">
+                    <input type="radio" id="high-price" name="price" value="high">
+                    <label for="high-price">High Price</label>
+                </div>
+            </div>
+
+            <!-- Filter by stars -->
+            <div class="filter-section">
+                <h3>Filter by stars</h3>
+                <div class="filter-item">
+                    <input type="radio" id="3-stars" name="stars" value="3">
+                    <label for="3-stars">3 Stars</label>
+                </div>
+                <div class="filter-item">
+                    <input type="radio" id="4-stars" name="stars" value="4">
+                    <label for="4-stars">4 Stars</label>
+                </div>
+                <div class="filter-item">
+                    <input type="radio" id="5-stars" name="stars" value="5">
+                    <label for="5-stars">5 Stars</label>
+                </div>
+            </div>
+
+            <!-- Filter by type -->
+            <div class="filter-section">
+                <h3>Filter by type</h3>
+                <div class="filter-item">
+                    <input type="radio" id="pdf-type" name="type" value="Book">
+                    <label for="pdf-type">Book</label>
+                </div>
+                <div class="filter-item">
+                    <input type="radio" id="video-type" name="type" value="video">
+                    <label for="video-type">Video</label>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="button">Apply filter</button>
+                <a href="{%url 'core:home'%}">Clear filter</a>
+
+            </div>
+        </div>
+    </form>
+
+        <!-- Course list and search bar -->
+        <div class="courses-list">
+
+            <!-- <div class="search-bar"></div>
+                <div id="fakebox" role="searchbox" tabindex="0" aria-label="Search or enter web address"><svg aria-hidden="true" id="searchbutton" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 2.75a7.25 7.25 0 015.63 11.82l4.9 4.9a.75.75 0 01-.98 1.13l-.08-.07-4.9-4.9A7.25 7.25 0 1110 2.75zm0 1.5a5.75 5.75 0 100 11.5 5.75 5.75 0 000-11.5z"></path></svg> <i id="cursor" aria-hidden="true" aria-disabled="true"></i><div id="placeholder" aria-hidden="true" aria-disabled="true">Search or enter web address</div></div>
+            </div> -->
+
+            <div class="search-bar">
+                <form action="{%url 'core:home'%}" method="GET">
+                    <input type="search" name="q" placeholder="Search courses...">
+                </form>
+            </div>
+            {%for object in object_list%}
+                <div class="course-item">
+                    <div class="course-info">
+                        <div class="course-image">Template</div>
+                        <div class="course-details">
+                            <div class="title">{{object.title}}</div>
+                            <div class="buyers">{{object.count}} Number of buyers</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <div class="buy-section">
+                        <a href="{{object.get_absolut_url}}"class="buy-button">detail</a>
+                        <div class="price">{{object.price}} Birr</div>
+                    </div>
+                </div>
+            {%endfor%}
+            <div>
+            <span>
+                {%if page_obj.has_previous%}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{page_obj.previous_page_number }}">previous</a>
+                {%endif%}
+
+                <span>
+                    Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+                </span>
+
+                {%if page_obj.has_next%}
+                <a href="?page={{page_obj.next_page_number }}">next</a>
+                <a href="?page={{page_obj.paginator.num_pages }}">last &laquo;</a>
+                {%endif%}    
+            </span>
+            </div>
+        </div>
+    </div>
+{%endblock%}

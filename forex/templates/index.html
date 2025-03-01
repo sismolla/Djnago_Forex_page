@@ -1,0 +1,28 @@
+
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>| Forex Courses</title>
+    <link rel="stylesheet" href="{%static 'css/main.css'%}">
+</head>
+<body>
+            {%block content%}
+
+            {%endblock%}
+    <!-- Footer -->
+    <footer class="footer">
+        © 2024 Online-Course-Shop, All rights reserved
+    </footer>
+
+    <!-- JavaScript for filter toggling -->
+    <script>
+        function toggleFilters() {
+            const filtersSection = document.getElementById('filters-section');
+            filtersSection.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>

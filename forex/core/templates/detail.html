@@ -1,0 +1,35 @@
+{%extends 'index.html'%}
+
+{%load static%}
+{%block content%}
+
+<div class="container-product">
+    <div class="product-detail">
+        <!-- Product Image -->
+        <div class="product-image">
+            <img src="path_to_image.jpg" alt="Product Name">
+        </div>
+
+        <!-- Product Details -->
+        <div class="product-info">
+            <h1>{{object.title}}</h1>
+            <p class="category">Category: {{object.file_type}}</p>
+            <p class="stars">Star: ★★★★★</p>
+
+            <!-- Price Section -->
+            <div class="price-label">{{object.price}} Birr</div>
+
+            <!-- Description Section -->
+            <div class="description">
+                <h3>Description</h3>
+                <p>{{object.description}}</p>
+            </div>
+
+            <!-- Buy Button -->
+            <a href="#" class="buy-p-button">Buy Now</a>
+        </div>
+    </div>
+    {%include 'related.html'%}
+</div>
+{%endblock%}
+
